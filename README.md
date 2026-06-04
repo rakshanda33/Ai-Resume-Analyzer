@@ -2,7 +2,7 @@
 
 > AI-powered resume analysis built with Python, Streamlit, and Google Gemini.
 
-🔗 **Live Demo:** [your-render-url.onrender.com](https://your-app.onrender.com)
+🔗 **Live Demo:** [will be added soon]
 
 ---
 
