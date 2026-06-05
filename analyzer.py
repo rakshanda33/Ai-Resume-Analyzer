@@ -25,18 +25,43 @@ def _call_gemini(prompt: str) -> str:
     try:
         response = model.generate_content(prompt)
         return response.text
+
     except Exception as e:
         error_msg = str(e).lower()
-        if "quota" in error_msg or "rate" in error_msg:
+
+        if (
+            "quota" in error_msg
+            or "rate" in error_msg
+            or "429" in error_msg
+            or "resource_exhausted" in error_msg
+        ):
             raise RuntimeError(
-                "Gemini API rate limit reached. Wait 60 seconds and try again."
+                """
+⚠️ Gemini free quota exhausted.
+
+Possible fixes:
+• Wait 1-2 minutes and try again
+• Create another Gemini API key
+• Upgrade Gemini quota
+
+The application is working correctly.
+Google is temporarily blocking requests because the free limit was reached.
+"""
             )
+
         if "api key" in error_msg or "invalid" in error_msg:
             raise RuntimeError(
-                "Invalid Gemini API key. Check your .env file."
-            )
-        raise RuntimeError(f"Gemini API error: {e}")
+                """
+❌ Invalid Gemini API Key.
 
+Check:
+1. .env file exists
+2. GEMINI_API_KEY is correct
+3. Restart Streamlit after changing .env
+"""
+            )
+
+        raise RuntimeError(f"Gemini API Error: {e}")
 
 def analyze_resume(resume_text: str) -> dict:
     """

@@ -234,12 +234,33 @@ weak = st.text_input(
     "Your bullet point",
     placeholder="e.g. Worked on the company website"
 )
+
 if weak and st.button("✨ Rewrite Bullet", type="secondary"):
     with st.spinner("Writing stronger versions..."):
         try:
             rewrites = rewrite_bullet(weak)
+
         except (RuntimeError, ValueError) as e:
-            st.error(f"❌ {e}")
+            st.error(str(e))
+
+            with st.expander("🔧 Troubleshooting"):
+                st.markdown("""
+### Common Fixes
+
+**Rate Limit Error**
+- Wait 1-2 minutes
+- Try again
+- Use another Gemini API key
+
+**Invalid API Key**
+- Check your `.env` file
+- Restart Streamlit
+
+**PDF Error**
+- Upload a text-based PDF
+- Avoid scanned image PDFs
+                """)
+
             st.stop()
 
     st.markdown("**3 stronger versions:**")
