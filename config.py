@@ -18,3 +18,8 @@ MIN_RESUME_CHARS: int   = 100  # catch empty/image PDFs
 APP_TITLE: str   = "AI Resume Analyzer"
 APP_ICON: str    = "📄"
 APP_VERSION: str = "2.0.0"
+
+# ── API ───────────────────────────────────────────────
+API_HOST: str    = "0.0.0.0"
+API_PORT: int    = 8000
+API_BASE_URL: str = os.getenv("API_BASE_URL", "http://localhost:8000")
