@@ -3,8 +3,14 @@
 RESUME_ANALYSIS_PROMPT = """
 You are a senior technical recruiter with 10+ years hiring engineers at top tech companies.
 
-Analyze the resume below. Return ONLY a valid JSON object.
-No explanation. No markdown. No code fences. Pure JSON only.
+Analyze the resume below.
+
+OUTPUT FORMAT — read carefully:
+Respond with ONLY a single JSON object and nothing else.
+Do not include markdown code fences (no ``` of any kind).
+Do not include any explanation, preamble, or commentary before or after the JSON.
+Do not say "Here is the analysis" or anything similar.
+The very first character of your response must be {{ and the very last character must be }}.
 
 Required structure:
 {{
@@ -43,7 +49,12 @@ ATS_MATCH_PROMPT = """
 You are an ATS (Applicant Tracking System) scanner.
 
 Compare the resume and job description below.
-Return ONLY valid JSON. No markdown. No explanation.
+
+OUTPUT FORMAT — read carefully:
+Respond with ONLY a single JSON object and nothing else.
+Do not include markdown code fences (no ``` of any kind).
+Do not include any explanation, preamble, or commentary before or after the JSON.
+The very first character of your response must be {{ and the very last character must be }}.
 
 {{
     "ats_score": <integer 0-100>,
@@ -65,7 +76,12 @@ You are an expert resume writer.
 Rewrite the bullet point below into 3 stronger versions.
 Rules: strong action verb, quantified impact where possible, under 20 words each.
 
-Return ONLY valid JSON:
+OUTPUT FORMAT — read carefully:
+Respond with ONLY a single JSON object and nothing else.
+Do not include markdown code fences (no ``` of any kind).
+Do not include any explanation, preamble, or commentary before or after the JSON.
+The very first character of your response must be {{ and the very last character must be }}.
+
 {{
     "rewrites": [
         "<stronger version 1>",
